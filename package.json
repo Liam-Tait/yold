@@ -1,7 +1,7 @@
 {
 	"name": "yold",
 	"description": "A library for working with naive ISO8061 dates",
-	"version": "1.0.0",
+	"version": "0.1.1",
 	"scripts": {
 		"build": "tsup",
 		"test": "tsx --test './test/**/*.test.*'"
