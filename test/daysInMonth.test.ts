@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, test } from "node:test";
-import { daysInMonth } from "../src/yold.js";
+import { daysInMonth } from "../src/daysInMonth.js";
 
 describe("daysInMonth", () => {
 	test("returns 31 for January", () => {
