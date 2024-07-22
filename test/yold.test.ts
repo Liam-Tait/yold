@@ -1,14 +1,14 @@
 import assert from "node:assert/strict";
 import { describe, test } from "node:test";
-import {
-	mask,
-	extractYear,
-	extractOrdinal,
-	extractLeapYear,
-	extractDayOfWeekOfDayBefore,
-} from "../src/yold.js";
-import { isLeapYear } from "../src/isLeapYear.js";
 import { getLastDayOfYearDayOfWeek } from "../src/getLastDayOfYearDayOfWeek.js";
+import { isLeapYear } from "../src/isLeapYear.js";
+import {
+	extractDayOfWeekOfDayBefore,
+	extractLeapYear,
+	extractOrdinal,
+	extractYear,
+	mask,
+} from "../src/yold.js";
 
 describe("mask & extract", () => {
 	test("extracts the same year, ordinal, leapYear, dow as masked", () => {
@@ -17,7 +17,7 @@ describe("mask & extract", () => {
 		for (let year = 1; year <= 9999; year++) {
 			const leapYear = isLeapYear(year) ? 1 : 0;
 			const dow = getLastDayOfYearDayOfWeek(year);
-            const maxOrdinal = leapYear ? 366 : 365;
+			const maxOrdinal = leapYear ? 366 : 365;
 			for (let ordinal = 1; ordinal <= maxOrdinal; ordinal++) {
 				const date = mask(year, ordinal, leapYear, dow);
 				const extractedYear = extractYear(date);
@@ -25,7 +25,7 @@ describe("mask & extract", () => {
 				const extractedLeapYear = extractLeapYear(date);
 				const extractedDow = extractDayOfWeekOfDayBefore(date);
 
-                assert.strictEqual(typeof date, "number");
+				assert.strictEqual(typeof date, "number");
 				assert.strictEqual(extractedYear, year);
 				assert.strictEqual(extractedOrdinal, ordinal);
 				assert.strictEqual(extractedLeapYear, leapYear);

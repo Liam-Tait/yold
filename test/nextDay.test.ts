@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import { describe, test } from "node:test";
+import { getYearMonthDay } from "../src/getYearMonthDay.js";
 import { nextDay } from "../src/nextDay.js";
-import { extractYear, fromYMD, getYearMonthDay } from "../src/yold.js";
+import { fromYMD } from "../src/yold.js";
 
 describe("nextDay", () => {
 	test("returns the next day", () => {

@@ -1,8 +1,6 @@
 import { daysInMonth } from "./daysInMonth.js";
 import { getLastDayOfYearDayOfWeek } from "./getLastDayOfYearDayOfWeek.js";
-import { isLeapYear } from "./isLeapYear.js";
-
-/**
+import { isLeapYear } from "./isLeapYear.js"; /**
  * Mask a year, ordinal, leap year, and day of week into a single number.
  *
  * The year is a 13-bit number, which allows for years from 1 to 9999.
@@ -18,8 +16,8 @@ import { isLeapYear } from "./isLeapYear.js";
  * Negative years are not supported.
  *
  * @param year The year, from 1 to 9999.
- * @param ordinal The ordinal, from 1 to 366.
- * @param leapYear 1 if year is a leap year, 0 otherwise.
+ * @param ordinal The ordinal days, from 1 to 366.
+ * @param leapYear 1 if year is a leap year, 0 if year is a common year.
  * @param dayOfWeek Day of the week for the last day of the year before this year. 1 for Monday, 7 for Sunday.
  */
 export function mask(
@@ -30,12 +28,13 @@ export function mask(
 ): number {
 	if (year < 1 || year > 9999) {
 		throw new Error(
-			`Invalid year: year must be greater than 0 but got ${year}`,
+			`Invalid year: year must be greater than 0 and less than 9999 but got ${year}`,
 		);
 	}
-	if (ordinal < 1 || ordinal > 366) {
+	const daysInYear = leapYear ? 366 : 365;
+	if (ordinal < 1 || ordinal > daysInYear) {
 		throw new Error(
-			`Invalid ordinal: ordinal must be between 1 and 366 but got ${ordinal}`,
+			`Invalid ordinal: ordinal must be between 1 and ${daysInYear} for ${year} but got ${ordinal}`,
 		);
 	}
 	if (dayOfWeek < 1 || dayOfWeek > 7) {
@@ -45,15 +44,10 @@ export function mask(
 	}
 	if (leapYear !== 0 && leapYear !== 1) {
 		throw new Error(
-			"Invalid leap year: leap year must be 0 or 1 but got ${leapYear}",
+			`Invalid leap year: leap year must be 0 or 1 but got ${leapYear}`,
 		);
 	}
-	const yearBits = year << 13;
-	const ordinalBits = ordinal << 4;
-	const leapYearBits = leapYear << 3;
-	const dayOfWeekBits = dayOfWeek;
-	const yold = yearBits | ordinalBits | leapYearBits | dayOfWeekBits;
-	return yold;
+	return (year << 13) | (ordinal << 4) | (leapYear << 3) | dayOfWeek;
 }
 
 /**
@@ -111,23 +105,6 @@ export function extractDayOfWeekOfDayBefore(yold: number): number {
 }
 
 /**
- * Get the year, month, and day from a YOLD date.
- * @param yold The YOLD date.
- * @returns The year, month, and day as a tuple.
- */
-export function getYearMonthDay(yold: number): [number, number, number] {
-	const year = extractYear(yold);
-	let day = extractOrdinal(yold);
-	const leapYear = extractLeapYear(yold);
-	let month = 1;
-	while (day > daysInMonth(month, leapYear)) {
-		day -= daysInMonth(month, leapYear);
-		month++;
-	}
-	return [year, month, day];
-}
-
-/**
  * Create a YOLD date from a year, month, and day.
  * @param year The year, from 1 to 9999.
  * @param month The month, from 1 to 12.
@@ -135,15 +112,16 @@ export function getYearMonthDay(yold: number): [number, number, number] {
  * @returns The YOLD date.
  */
 export function fromYMD(year: number, month: number, day: number): number {
-	if (year < 1) {
-		throw new Error("Invalid year");
-	}
 	if (month < 1 || month > 12) {
-		throw new Error("Invalid month");
+		throw new Error(
+			`Invalid month: month must be between 1 and 12 but got ${month}`,
+		);
 	}
 	const leapYear = isLeapYear(year) ? 1 : 0;
 	if (day < 1 || day > daysInMonth(month, leapYear)) {
-		throw new Error("Invalid date");
+		throw new Error(
+			`Invalid day: day must be between 1 and ${daysInMonth(month, leapYear)} for ${month}/${year} but got ${day}`,
+		);
 	}
 	let ordinal = 0;
 	while (month > 1) {
