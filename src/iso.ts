@@ -1,5 +1,5 @@
-import { fromYMD } from "./yold";
-import { getYearMonthDay } from "./yold";
+import { fromYMD } from "./yold.js";
+import { getYearMonthDay } from "./yold.js";
 
 /**
  * Convert an ISO date string to a YOLD date.

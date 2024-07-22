@@ -1,11 +1,11 @@
-import { isLeapYear } from "./isLeapYear";
+import { isLeapYear } from "./isLeapYear.js";
 import {
 	extractDayOfWeekOfDayBefore,
 	extractLeapYear,
 	extractOrdinal,
 	extractYear,
 	mask,
-} from "./yold";
+} from "./yold.js";
 
 /**
  * Get the next day

@@ -1,5 +1,5 @@
-import { getLastDayOfYearDayOfWeek } from "./getLastDayOfYearDayOfWeek";
-import { isLeapYear } from "./isLeapYear";
+import { getLastDayOfYearDayOfWeek } from "./getLastDayOfYearDayOfWeek.js";
+import { isLeapYear } from "./isLeapYear.js";
 
 /**
  * Mask a year, ordinal, leap year, and day of week into a single number.
