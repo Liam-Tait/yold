@@ -1,12 +1,12 @@
-import { describe, test, expect } from "vitest";
+import { describe, expect, test } from "vitest";
+import { nextDay } from "../src/nextDay.js";
 import {
-	fromYMD,
-	extractYear,
 	extractDayOfWeekOfDayBefore,
 	extractLeapYear,
 	extractOrdinal,
+	extractYear,
+	fromYMD,
 } from "../src/yold.js";
-import { nextDay } from "../src/nextDay.js";
 
 test("nextDay", () => {
 	const yold = fromYMD(2024, 1, 1);
