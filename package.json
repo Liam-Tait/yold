@@ -4,7 +4,7 @@
 	"version": "1.0.0",
 	"scripts": {
 		"build": "tsup",
-		"test": "npx vitest"
+		"test": "tsx --test './test/**/*.test.*'"
 	},
 	"type": "module",
 	"main": "dist/index.cjs",
@@ -14,9 +14,10 @@
 	"author": "liam-tait",
 	"devDependencies": {
 		"@biomejs/biome": "1.8.3",
+		"@types/node": "^20.14.11",
 		"tsup": "^8.2.2",
-		"typescript": "^5.5.3",
-		"vitest": "^2.0.3"
+		"tsx": "^4.16.2",
+		"typescript": "^5.5.3"
 	},
 	"tsup": {
 		"format": ["esm", "cjs"],

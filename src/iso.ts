@@ -10,10 +10,17 @@ import { getYearMonthDay } from "./yold";
 export function fromISODate(isoDateString: string): number {
 	const [yearStr, monthStr, dayStr] = isoDateString.split("-", 3);
 
-	const year = Number.parseInt(yearStr, 10);
-	const month = Number.parseInt(monthStr, 10);
-	const day = Number.parseInt(dayStr, 10);
-	if (Number.isNaN(year) || Number.isNaN(month) || Number.isNaN(day)) {
+	const year = Number(yearStr);
+	const month = Number(monthStr);
+	const day = Number(dayStr);
+	if (
+		Number.isNaN(year) ||
+		Number.isNaN(month) ||
+		Number.isNaN(day) ||
+		!Number.isInteger(year) ||
+		!Number.isInteger(month) ||
+		!Number.isInteger(day)
+	) {
 		throw new Error(`Invalid ISO date string: ${isoDateString}`);
 	}
 	return fromYMD(year, month, day);
