@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import { describe, test } from "node:test";
+import { DOW } from "../src/constants.js";
 import { getDayOfWeek } from "../src/getDayOfWeek.js";
 import { fromYMD } from "../src/yold.js";
-import { DOW } from "../src/constants.js";
 
 describe("getDayOfWeek", () => {
 	test("returns the day of the week for a given yold date", () => {
