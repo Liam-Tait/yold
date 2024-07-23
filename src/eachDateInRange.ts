@@ -11,7 +11,7 @@ export function* eachDateInRange(
 	end: number,
 ): Generator<number> {
 	let current = start;
-	while (current < end) {
+	while (current <= end) {
 		yield current;
 		current = nextDay(current);
 	}

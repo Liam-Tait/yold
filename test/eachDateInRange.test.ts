@@ -9,7 +9,7 @@ describe("eachDateInRange", () => {
 		const start = fromYMD(2025, 1, 1);
 		const end = fromYMD(2025, 2, 1);
 		const result = Array.from(eachDateInRange(start, end));
-		assert.strictEqual(result.length, 31); // 31 days in January
+		assert.strictEqual(result.length, 32); // 31 days in January + 1 day in February
 		assert.deepStrictEqual(result.map(toISOString), [
 			"2025-01-01",
 			"2025-01-02",
@@ -42,13 +42,15 @@ describe("eachDateInRange", () => {
 			"2025-01-29",
 			"2025-01-30",
 			"2025-01-31",
+			"2025-02-01",
 		]);
 	});
-	test("generates no dates if start is equal to end", () => {
+	test("generates 1 date if start is equal to end", () => {
 		const start = fromYMD(2025, 1, 1);
 		const end = fromYMD(2025, 1, 1);
 		const result = Array.from(eachDateInRange(start, end));
-		assert.strictEqual(result.length, 0);
+		assert.strictEqual(result.length, 1);
+		assert.strictEqual(toISOString(result[0]), "2025-01-01");
 	});
 	test("generates no dates if start is after end", () => {
 		const start = fromYMD(2025, 1, 2);
