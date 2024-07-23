@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, test } from "node:test";
-import { fromYMD } from "../src/yold.js";
 import { toISOString } from "../src/iso.js";
+import { fromYMD } from "../src/yold.js";
 
 describe("comparing a yold date", () => {
 	test("yold <", () => {
@@ -51,7 +51,7 @@ describe("comparing a yold date", () => {
 			.sort((a, b) => a - b)
 			.map(toISOString);
 		assert.deepStrictEqual(dates, [
-            '2000-01-05',
+			"2000-01-05",
 			"2022-01-04",
 			"2025-01-02",
 			"2025-01-03",
