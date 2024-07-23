@@ -1,4 +1,4 @@
-import { extractDayOfWeekOfDayBefore, extractOrdinal } from ".";
+import { extractDayOfWeekOfDayBefore, extractOrdinal } from "./yold.js";
 
 /**
  * Get the day of the week for a given YOLD date.
@@ -15,9 +15,10 @@ import { extractDayOfWeekOfDayBefore, extractOrdinal } from ".";
  * @returns The 1-indexed day of the week for the given YOLD date.
  */
 export function getDayOfWeek(yold: number): number {
-	const dayOfWeek = extractDayOfWeekOfDayBefore(yold);
+	const lastDayPreviousYear = extractDayOfWeekOfDayBefore(yold);
 	const ordinal = extractOrdinal(yold);
-	let dow = (dayOfWeek + ordinal) % 7;
+	let dow = (lastDayPreviousYear + ordinal) % 7;
+	// # Adjust for the modulus result to fit the 1 to 7 range
 	if (dow === 0) {
 		dow = 7;
 	}
