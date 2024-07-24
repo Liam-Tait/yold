@@ -6,6 +6,9 @@
 		"build": "tsup",
 		"test": "tsx --test './test/**/*.test.*'"
 	},
+	"repository": {
+		"url": "https://github.com/Liam-Tait/yold"
+	},
 	"type": "module",
 	"main": "dist/index.cjs",
 	"module": "dist/index.js",
